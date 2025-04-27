@@ -331,11 +331,7 @@
 
       useEffect(() => {
         const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        if (!loggedIn) {
-          window.location.href = 'index.html';
-        } else {
-          setIsLoggedIn(true);
-        }
+        setIsLoggedIn(loggedIn);
       }, []);
 
       const handleLogout = () => {
@@ -396,7 +392,17 @@
       };
 
       if (!isLoggedIn) {
-        return null;
+        return (
+          <div className="admin-container">
+            <p>Будь ласка, увійдіть через головну сторінку.</p>
+            <button
+              onClick={() => window.location.href = 'index.html'}
+              className="btn btn-back"
+            >
+              ← Назад
+            </button>
+          </div>
+        );
       }
 
       return (
