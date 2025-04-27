@@ -537,6 +537,7 @@
 
       const handleLogin = () => {
         if (username && password) {
+          localStorage.setItem('isLoggedIn', 'true'); // Зберігаємо стан авторизації
           setLoggedIn(true);
           if (userType === 'admin') {
             window.location.href = 'admin.html';
