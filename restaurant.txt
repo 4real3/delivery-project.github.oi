@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель ресторану</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .btn-delete {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .btn-delete:hover {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+    }
+
+    .btn-back {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-back:hover {
+      background: linear-gradient(135deg, #4b5563, #374151);
+    }
+
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #f1f5f9, #e5e7eb);
+    }
+
+    .login-card {
+      background: #ffffff;
+      padding: 3rem;
+      border-radius: 2rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 0.6s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .login-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      background: linear-gradient(to right, #3b82f6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background: #f9fafb;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    }
+
+    .textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .restaurant-container {
+      padding: 3rem 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #f9fafb;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      background: linear-gradient(to right, #3b82f6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .menu-form {
+      background: linear-gradient(145deg, #ffffff, #f1f5f9);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 3rem;
+    }
+
+    .menu-list {
+      margin-top: 3rem;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .menu-item {
+      background: linear-gradient(145deg, #ffffff, #f1f5f9);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu-item-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .menu-item-price {
+      color: #475569;
+      margin: 0.75rem 0;
+      font-weight: 500;
+    }
+
+    .menu-item-description {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .text-gray-500 {
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.9/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const Login = ({ setLoggedIn }) => {
+      const [username, setUsername] = useState('');
+      const [password, setPassword] = useState('');
+
+      const handleLogin = () => {
+        if (username && password) {
+          setLoggedIn(true);
+          localStorage.setItem('isLoggedIn', 'true');
+        } else {
+          alert('Введіть логін і пароль');
+        }
+      };
+
+      return (
+        <div className="login-container">
+          <button
+            onClick={() => window.location.href = 'index.html'}
+            className="btn btn-back"
+          >
+            ← Назад
+          </button>
+          <div className="login-card">
+            <h2 className="login-title">Вхід для ресторану</h2>
+            <input
+              type="text"
+              placeholder="Логін"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="input-field"
+            />
+            <input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-field"
+            />
+            <button
+              onClick={handleLogin}
+              className="btn btn-primary"
+            >
+              Увійти
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const RestaurantPanel = () => {
+      const [menuItems, setMenuItems] = useState([
+        { id: 1, name: 'Піца Маргарита', price: 200, description: 'Класична піца з томатним соусом і моцарелою' },
+        { id: 2, name: 'Суші Філадельфія', price: 300, description: 'Лосось, вершковий сир, авокадо' },
+      ]);
+      const [newItem, setNewItem] = useState({ name: '', price: '', description: '' });
+
+      const addMenuItem = () => {
+        if (newItem.name && newItem.price) {
+          setMenuItems([...menuItems, { ...newItem, id: Date.now() }]);
+          setNewItem({ name: '', price: '', description: '' });
+        } else {
+          alert('Заповніть назву та ціну');
+        }
+      };
+
+      const deleteMenuItem = (id) => {
+        setMenuItems(menuItems.filter((item) => item.id !== id));
+      };
+
+      const handleLogout = () => {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'index.html';
+      };
+
+      return (
+        <div className="restaurant-container">
+          <button
+            onClick={handleLogout}
+            className="btn btn-back"
+          >
+            ← Вийти
+          </button>
+          <h1 className="section-title">Панель ресторану</h1>
+          <div className="menu-form">
+            <h2 className="card-title">Додати страву</h2>
+            <input
+              type="text"
+              placeholder="Назва страви"
+              value={newItem.name}
+              onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="number"
+              placeholder="Ціна (грн)"
+              value={newItem.price}
+              onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
+              className="input-field"
+            />
+            <textarea
+              placeholder="Опис"
+              value={newItem.description}
+              onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+              className="input-field textarea"
+            ></textarea>
+            <button
+              onClick={addMenuItem}
+              className="btn btn-primary"
+            >
+              Додати страву
+            </button>
+          </div>
+          <div className="menu-list">
+            <h2 className="card-title">Меню</h2>
+            {menuItems.length === 0 ? (
+              <p className="text-gray-500">Меню порожнє</p>
+            ) : (
+              <ul className="menu-items">
+                {menuItems.map((item) => (
+                  <li key={item.id} className="menu-item">
+                    <h3 className="menu-item-title">{item.name}</h3>
+                    <p className="menu-item-price">Ціна: {item.price} грн</p>
+                    <p className="menu-item-description">{item.description}</p>
+                    <button
+                      onClick={() => deleteMenuItem(item.id)}
+                      className="btn btn-delete"
+                    >
+                      Видалити
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+      useEffect(() => {
+        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        setIsLoggedIn(loggedIn);
+      }, []);
+
+      if (!isLoggedIn) {
+        return <Login setLoggedIn={setIsLoggedIn} />;
+      }
+
+      return <RestaurantPanel />;
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
