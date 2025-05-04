@@ -6,472 +6,42 @@
   <title>Сервіс доставки їжі</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
-      color: #1e293b;
-      line-height: 1.6;
-    }
-
-    .home-container {
-      min-height: 100vh;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(31, 41, 55, 0.9)), 
-                  url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed;
-      padding: 3rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .home-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(236, 72, 153, 0.1));
-      z-index: 1;
-    }
-
-    .home-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      z-index: 2;
-    }
-
-    .home-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 0.75rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      animation: fadeInDown 1s ease-out;
-    }
-
-    .home-subtitle {
-      font-size: 1.5rem;
-      color: #d1d5db;
-      font-weight: 400;
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .promo-banner {
-      background: linear-gradient(145deg, #ffffff, #f1f5f9);
-      padding: 2.5rem;
-      border-radius: 1.5rem;
-      text-align: center;
-      max-width: 700px;
-      width: 100%;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      margin-bottom: 3rem;
-      position: relative;
-      z-index: 2;
-      animation: slideIn 0.8s ease-out;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .promo-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(to right, #3b82f6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .promo-text {
-      color: #64748b;
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .home-buttons {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      z-index: 2;
-    }
-
-    @media (max-width: 768px) {
-      .home-buttons {
-        flex-direction: column;
-        align-items: flex-end;
-      }
-    }
-
-    .reviews-section {
-      margin-top: 5rem;
-      max-width: 1000px;
-      width: 100%;
-      text-align: center;
-      padding: 2rem;
-      background: #ffffff;
-      border-radius: 2rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      z-index: 2;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      background: linear-gradient(to right, #3b82f6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .reviews-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .review-card {
-      background: linear-gradient(145deg, #f8fafc, #e2e8f0);
-      padding: 2rem;
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .review-card::before {
-      content: '★';
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 2rem;
-      color: #f59e0b;
-      opacity: 0.3;
-    }
-
-    .review-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .review-text {
-      font-size: 1.1rem;
-      color: #475569;
-      margin-bottom: 1rem;
-      font-style: italic;
-    }
-
-    .review-author {
-      font-size: 1rem;
-      color: #94a3b8;
-      font-weight: 600;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 3rem;
-      font-weight: 600;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: 0.5s;
-    }
-
-    .btn:hover::before {
-      left: 100%;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    }
-
-    .btn-restaurant {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-    }
-
-    .btn-restaurant:hover {
-      background: linear-gradient(135deg, #d97706, #b45309);
-    }
-
-    .btn-courier {
-      background: linear-gradient(135deg, #10b981, #059669);
-    }
-
-    .btn-courier:hover {
-      background: linear-gradient(135deg, #059669, #047857);
-    }
-
-    .btn-admin {
-      background: linear-gradient(135deg, #ec4899, #db2777);
-    }
-
-    .btn-admin:hover {
-      background: linear-gradient(135deg, #db2777, #be185d);
-    }
-
-    .btn-delete {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-    }
-
-    .btn-delete:hover {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-    }
-
-    .btn-back {
-      background: linear-gradient(135deg, #6b7280, #4b5563);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 2rem;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-back:hover {
-      background: linear-gradient(135deg, #4b5563, #374151);
-    }
-
-    .login-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
-      background: linear-gradient(135deg, #f1f5f9, #e5e7eb);
-    }
-
-    .login-card {
-      background: #ffffff;
-      padding: 3rem;
-      border-radius: 2rem;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      animation: fadeIn 0.6s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .login-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2.5rem;
-      text-align: center;
-      background: linear-gradient(to right, #3b82f6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.75rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      background: #f9fafb;
-    }
-
-    .input-field:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
-    }
-
-    .textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .restaurant-container {
-      padding: 3rem 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #f9fafb;
-    }
-
-    .menu-form {
-      background: linear-gradient(145deg, #ffffff, #f1f5f9);
-      padding: 2.5rem;
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      margin-bottom: 3rem;
-    }
-
-    .menu-list {
-      margin-top: 3rem;
-    }
-
-    .menu-items {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .menu-item {
-      background: linear-gradient(145deg, #ffffff, #f1f5f9);
-      padding: 2rem;
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .menu-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .menu-item-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .menu-item-price {
-      color: #475569;
-      margin: 0.75rem 0;
-      font-weight: 500;
-    }
-
-    .menu-item-description {
-      color: #64748b;
-      margin-bottom: 1.5rem;
-    }
-
-    .courier-container {
-      padding: 3rem 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #f9fafb;
-    }
-
-    .courier-controls {
-      margin-bottom: 3rem;
-    }
-
-    .ai-toggle {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 1.1rem;
-      color: #1e293b;
-    }
-
-    .ai-toggle input {
-      width: 1.75rem;
-      height: 1.75rem;
-      accent-color: #3b82f6;
-    }
-
-    .order-list, .completed-orders {
-      margin-top: 3rem;
-    }
-
-    .orders {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .order-item {
-      background: linear-gradient(145deg, #ffffff, #f1f5f9);
-      padding: 2rem;
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .order-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .order-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .order-address, .order-details {
-      color: #475569;
-      margin: 0.75rem 0;
-    }
-
-    .order-status {
-      color: #64748b;
-      font-weight: 500;
-    }
-
-    .order-actions {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .text-gray-500 {
-      color: #64748b;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; color: #1e293b; line-height: 1.6; }
+    .home-container { min-height: 100vh; background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(31,41,55,0.9)), url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center; background-size: cover; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+    .home-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(236,72,153,0.1)); z-index: 1; }
+    .home-header { text-align: center; margin-bottom: 2rem; z-index: 2; }
+    .home-title { font-size: 2.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .home-subtitle { font-size: 1.2rem; color: #d1d5db; font-weight: 400; }
+    .promo-banner { background: linear-gradient(145deg, #ffffff, #f1f5f9); padding: 2rem; border-radius: 1rem; text-align: center; max-width: 90%; width: 100%; box-shadow: 0 10px 20px rgba(0,0,0,0.15); margin-bottom: 2rem; z-index: 2; }
+    .promo-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; background: linear-gradient(to right, #3b82f6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .promo-text { color: #64748b; font-size: 1rem; margin-bottom: 1rem; }
+    .home-buttons { position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.5rem; z-index: 2; }
+    @media (max-width: 768px) { .home-container { padding: 1rem 0.5rem; } .home-title { font-size: 1.8rem; } .home-subtitle { font-size: 1rem; } .home-buttons { top: 0.5rem; right: 0.5rem; flex-direction: column; } .promo-banner { padding: 1.5rem; } .promo-title { font-size: 1.2rem; } .promo-text { font-size: 0.9rem; } }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 2rem; font-weight: 600; font-size: 0.9rem; color: white; border: none; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2); text-transform: uppercase; letter-spacing: 0.5px; touch-action: manipulation; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .btn-primary:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+    .btn-restaurant, .btn-courier, .btn-admin, .btn-user { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .btn-restaurant:hover, .btn-courier:hover, .btn-admin:hover, .btn-user:hover { background: linear-gradient(135deg, #d97706, #b45309); }
+    .btn-back { background: linear-gradient(135deg, #6b7280, #4b5563); display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); font-size: 0.9rem; }
+    .btn-back:hover { background: linear-gradient(135deg, #4b5563, #374151); }
+    @media (max-width: 768px) { .btn { padding: 0.6rem 1.2rem; font-size: 0.8rem; } .btn-back { padding: 0.4rem 0.8rem; font-size: 0.8rem; } }
+    .login-container, .register-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; background: linear-gradient(135deg, #f1f5f9, #e5e7eb); }
+    .login-card, .register-card { background: #ffffff; padding: 2rem; border-radius: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 100%; max-width: 90%; }
+    .login-title, .register-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; background: linear-gradient(to right, #3b82f6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .input-field { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; }
+    .input-field:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+    .textarea { min-height: 120px; resize: vertical; }
+    .role-select { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; }
+    @media (max-width: 768px) { .login-container, .register-container { padding: 1rem 0.5rem; } .login-card, .register-card { padding: 1.5rem; } .login-title, .register-title { font-size: 1.2rem; } .input-field, .role-select { padding: 0.6rem; font-size: 0.9rem; } }
+    .profile-container { padding: 2rem 1rem; max-width: 90%; margin: 0 auto; background: #f9fafb; }
+    .profile-card { background: linear-gradient(145deg, #ffffff, #f1f5f9); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+    .profile-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .profile-info { margin-bottom: 1rem; font-size: 1rem; }
+    .order-form { margin-top: 1.5rem; }
+    .order-item { background: linear-gradient(145deg, #ffffff, #f1f5f9); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 6px 15px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+    @media (max-width: 768px) { .profile-container { padding: 1rem 0.5rem; } .profile-title { font-size: 1.2rem; } .profile-info { font-size: 0.9rem; } }
   </style>
 </head>
 <body>
@@ -482,28 +52,14 @@
   <script type="text/babel">
     const { useState, useEffect } = React;
 
+    const API_URL = 'http://localhost:3000'; // Змініть на URL вашого хостингу після розгортання
+
     const HomePage = ({ setUserType }) => {
       return (
         <div className="home-container">
           <div className="home-buttons">
-            <button
-              onClick={() => setUserType('restaurant')}
-              className="btn btn-restaurant"
-            >
-              Для ресторанів
-            </button>
-            <button
-              onClick={() => setUserType('courier')}
-              className="btn btn-courier"
-            >
-              Для кур’єрів
-            </button>
-            <button
-              onClick={() => setUserType('admin')}
-              className="btn btn-admin"
-            >
-              Адмін-панель
-            </button>
+            <button onClick={() => setUserType('register')} className="btn btn-user">Реєстрація</button>
+            <button onClick={() => setUserType('login')} className="btn btn-user">Увійти</button>
           </div>
           <header className="home-header">
             <h1 className="home-title">Смакота: Доставка їжі</h1>
@@ -514,270 +70,325 @@
             <p className="promo-text">Замовляйте улюблені страви вже зараз.</p>
             <button className="btn btn-primary">Спробувати</button>
           </div>
-          <div className="reviews-section">
-            <h2 className="section-title">Що кажуть клієнти</h2>
-            <div className="reviews-grid">
-              <div className="review-card">
-                <p className="review-text">"Доставка за 30 хвилин, усе гаряче!"</p>
-                <p className="review-author">— Анна, Київ</p>
-              </div>
-              <div className="review-card">
-                <p className="review-text">"Суші просто неймовірні, рекомендую!"</p>
-                <p className="review-author">— Олег, Львів</p>
-              </div>
+        </div>
+      );
+    };
+
+    const Register = ({ setUserType }) => {
+      const [username, setUsername] = useState('');
+      const [password, setPassword] = useState('');
+      const [role, setRole] = useState('user');
+
+      const handleRegister = async () => {
+        try {
+          const response = await fetch(`${API_URL}/users`);
+          const users = await response.json();
+          if (users.find(user => user.username === username)) {
+            alert('Користувач уже існує!');
+            return;
+          }
+          const newUser = { id: Date.now().toString(), username, password, role };
+          await fetch(`${API_URL}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser),
+          });
+          alert('Реєстрація успішна!');
+          setUserType('login');
+        } catch (error) {
+          alert('Помилка реєстрації: ' + error.message);
+        }
+      };
+
+      return (
+        <div className="register-container">
+          <button onClick={() => setUserType(null)} className="btn btn-back">← Назад</button>
+          <div className="register-card">
+            <h2 className="register-title">Реєстрація</h2>
+            <input type="text" placeholder="Логін" value={username} onChange={(e) => setUsername(e.target.value)} className="input-field" />
+            <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} className="input-field" />
+            <select value={role} onChange={(e) => setRole(e.target.value)} className="role-select">
+              <option value="user">Користувач</option>
+              <option value="restaurant">Ресторан</option>
+              <option value="courier">Кур’єр</option>
+              <option value="admin">Адміністрація</option>
+            </select>
+            <button onClick={handleRegister} className="btn btn-primary">Зареєструватися</button>
+          </div>
+        </div>
+      );
+    };
+
+    const Login = ({ setUserType, setLoggedIn }) => {
+      const [username, setUsername] = useState('');
+      const [password, setPassword] = useState('');
+      const [role, setRole] = useState('user');
+
+      const handleLogin = async () => {
+        try {
+          const response = await fetch(`${API_URL}/users`);
+          const users = await response.json();
+          const user = users.find(u => u.username === username && u.password === password && u.role === role);
+          if (user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            setLoggedIn(true);
+            if (user.role === 'admin') window.location.href = 'admin.html';
+            else if (user.role === 'restaurant') window.location.href = 'restaurants.html';
+            else if (user.role === 'courier') window.location.href = 'index.html#courier';
+            else window.location.href = 'index.html#user';
+          } else {
+            alert('Неправильний логін, пароль або роль!');
+          }
+        } catch (error) {
+          alert('Помилка входу: ' + error.message);
+        }
+      };
+
+      return (
+        <div className="login-container">
+          <button onClick={() => setUserType(null)} className="btn btn-back">← Назад</button>
+          <div className="login-card">
+            <h2 className="login-title">Увійти</h2>
+            <input type="text" placeholder="Логін" value={username} onChange={(e) => setUsername(e.target.value)} className="input-field" />
+            <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} className="input-field" />
+            <select value={role} onChange={(e) => setRole(e.target.value)} className="role-select">
+              <option value="user">Користувач</option>
+              <option value="restaurant">Ресторан</option>
+              <option value="courier">Кур’єр</option>
+              <option value="admin">Адміністрація</option>
+            </select>
+            <button onClick={handleLogin} className="btn btn-primary">Увійти</button>
+          </div>
+        </div>
+      );
+    };
+
+    const Profile = ({ setLoggedIn }) => {
+      const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const [restaurants, setRestaurants] = useState([]);
+      const [orders, setOrders] = useState([]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          const restaurantsResponse = await fetch(`${API_URL}/restaurants`);
+          const restaurantsData = await restaurantsResponse.json();
+          setRestaurants(restaurantsData);
+
+          const ordersResponse = await fetch(`${API_URL}/orders`);
+          const ordersData = await ordersResponse.json();
+          setOrders(ordersData);
+        };
+        fetchData();
+      }, []);
+
+      const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        setLoggedIn(false);
+        window.location.href = 'index.html';
+      };
+
+      return (
+        <div className="profile-container">
+          <button onClick={handleLogout} className="btn btn-back">← Вийти</button>
+          <div className="profile-card">
+            <h2 className="profile-title">Особистий кабінет</h2>
+            <p className="profile-info">Логін: {user.username}</p>
+            <p className="profile-info">Роль: {user.role}</p>
+            {user.role === 'user' && <UserPanel restaurants={restaurants} />}
+            {user.role === 'restaurant' && <RestaurantPanel userId={user.id} restaurants={restaurants} />}
+            {user.role === 'courier' && <CourierPanel orders={orders} setOrders={setOrders} />}
+          </div>
+        </div>
+      );
+    };
+
+    const UserPanel = ({ restaurants }) => {
+      const [selectedRestaurant, setSelectedRestaurant] = useState('');
+      const [selectedItem, setSelectedItem] = useState('');
+      const menuItems = restaurants.find(r => r.name === selectedRestaurant)?.menu || [];
+
+      const handleOrder = async () => {
+        if (selectedRestaurant && selectedItem) {
+          const newOrder = { id: Date.now(), restaurant: selectedRestaurant, item: selectedItem, status: 'Нове' };
+          await fetch(`${API_URL}/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newOrder),
+          });
+          alert('Замовлення створено!');
+          setSelectedRestaurant('');
+          setSelectedItem('');
+        } else {
+          alert('Виберіть ресторан і страву!');
+        }
+      };
+
+      return (
+        <div className="order-form">
+          <h3 className="profile-title">Створити замовлення</h3>
+          <select value={selectedRestaurant} onChange={(e) => setSelectedRestaurant(e.target.value)} className="input-field">
+            <option value="">Виберіть ресторан</option>
+            {restaurants.map(r => <option key={r.id} value={r.name}>{r.name}</option>)}
+          </select>
+          <select value={selectedItem} onChange={(e) => setSelectedItem(e.target.value)} className="input-field">
+            <option value="">Виберіть страву</option>
+            {menuItems.map(i => <option key={i.id} value={i.name}>{i.name} ({i.price} грн)</option>)}
+          </select>
+          <button onClick={handleOrder} className="btn btn-primary">Замовити</button>
+        </div>
+      );
+    };
+
+    const RestaurantPanel = ({ userId, restaurants }) => {
+      const restaurant = restaurants.find(r => r.owner === userId) || { id: Date.now(), name: userId, menu: [], owner: userId };
+      const [newItem, setNewItem] = useState({ name: '', price: '', description: '' });
+
+      useEffect(() => {
+        const initializeRestaurant = async () => {
+          if (!restaurants.find(r => r.owner === userId)) {
+            const newRestaurant = { id: Date.now(), name: userId, menu: [], owner: userId };
+            await fetch(`${API_URL}/restaurants`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newRestaurant),
+            });
+          }
+        };
+        initializeRestaurant();
+      }, [userId, restaurants]);
+
+      const addMenuItem = async () => {
+        if (newItem.name && newItem.price) {
+          const updatedMenu = [...restaurant.menu, { ...newItem, id: Date.now() }];
+          await fetch(`${API_URL}/restaurants/${restaurant.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ menu: updatedMenu }),
+          });
+          setNewItem({ name: '', price: '', description: '' });
+          window.location.reload(); // Оновлення сторінки для відображення змін
+        } else {
+          alert('Заповніть назву та ціну!');
+        }
+      };
+
+      const deleteMenuItem = async (id) => {
+        const updatedMenu = restaurant.menu.filter(item => item.id !== id);
+        await fetch(`${API_URL}/restaurants/${restaurant.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ menu: updatedMenu }),
+        });
+        window.location.reload();
+      };
+
+      return (
+        <div className="profile-container">
+          <div className="profile-card">
+            <h2 className="profile-title">Панель ресторану</h2>
+            <div>
+              <input type="text" placeholder="Назва страви" value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} className="input-field" />
+              <input type="number" placeholder="Ціна (грн)" value={newItem.price} onChange={(e) => setNewItem({ ...newItem, price: e.target.value })} className="input-field" />
+              <textarea placeholder="Опис" value={newItem.description} onChange={(e) => setNewItem({ ...newItem, description: e.target.value })} className="input-field textarea"></textarea>
+              <button onClick={addMenuItem} className="btn btn-primary">Додати страву</button>
+            </div>
+            <div>
+              <h3 className="profile-title">Меню</h3>
+              {restaurant.menu.length === 0 ? (
+                <p>Меню порожнє</p>
+              ) : (
+                <ul>
+                  {restaurant.menu.map(item => (
+                    <li key={item.id} className="order-item">
+                      <p>{item.name} - {item.price} грн</p>
+                      <p>{item.description}</p>
+                      <button onClick={() => deleteMenuItem(item.id)} className="btn btn-delete">Видалити</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>
       );
     };
 
-    const Login = ({ userType, setLoggedIn, setUserType }) => {
-      const [username, setUsername] = useState('');
-      const [password, setPassword] = useState('');
-
-      const handleLogin = () => {
-        if (username && password) {
-          setLoggedIn(true);
-          if (userType === 'admin') {
-            window.location.href = 'admin.html';
-          }
-        } else {
-          alert('Введіть логін і пароль');
-        }
-      };
-
-      return (
-        <div className="login-container">
-          <button
-            onClick={() => setUserType(null)}
-            className="btn btn-back"
-          >
-            ← Назад
-          </button>
-          <div className="login-card">
-            <h2 className="login-title">
-              Вхід для {userType === 'restaurant' ? 'ресторану' : userType === 'courier' ? 'кур’єра' : 'адміна'}
-            </h2>
-            <input
-              type="text"
-              placeholder="Логін"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="input-field"
-            />
-            <input
-              type="password"
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
-            />
-            <button
-              onClick={handleLogin}
-              className="btn btn-primary"
-            >
-              Увійти
-            </button>
-          </div>
-        </div>
-      );
-    };
-
-    const RestaurantPanel = ({ setUserType, setLoggedIn }) => {
-      const [menuItems, setMenuItems] = useState([
-        { id: 1, name: 'Піца Маргарита', price: 200, description: 'Класична піца з томатним соусом і моцарелою' },
-        { id: 2, name: 'Суші Філадельфія', price: 300, description: 'Лосось, вершковий сир, авокадо' },
-      ]);
-      const [newItem, setNewItem] = useState({ name: '', price: '', description: '' });
-
-      const addMenuItem = () => {
-        if (newItem.name && newItem.price) {
-          setMenuItems([...menuItems, { ...newItem, id: Date.now() }]);
-          setNewItem({ name: '', price: '', description: '' });
-        } else {
-          alert('Заповніть назву та ціну');
-        }
-      };
-
-      const deleteMenuItem = (id) => {
-        setMenuItems(menuItems.filter((item) => item.id !== id));
-      };
-
-      return (
-        <div className="restaurant-container">
-          <button
-            onClick={() => { setUserType(null); setLoggedIn(false); }}
-            className="btn btn-back"
-          >
-            ← Назад
-          </button>
-          <h1 className="section-title">Панель ресторану</h1>
-          <div className="menu-form">
-            <h2 className="card-title">Додати страву</h2>
-            <input
-              type="text"
-              placeholder="Назва страви"
-              value={newItem.name}
-              onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="number"
-              placeholder="Ціна (грн)"
-              value={newItem.price}
-              onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
-              className="input-field"
-            />
-            <textarea
-              placeholder="Опис"
-              value={newItem.description}
-              onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-              className="input-field textarea"
-            ></textarea>
-            <button
-              onClick={addMenuItem}
-              className="btn btn-primary"
-            >
-              Додати страву
-            </button>
-          </div>
-          <div className="menu-list">
-            <h2 className="card-title">Меню</h2>
-            {menuItems.length === 0 ? (
-              <p className="text-gray-500">Меню порожнє</p>
-            ) : (
-              <ul className="menu-items">
-                {menuItems.map((item) => (
-                  <li key={item.id} className="menu-item">
-                    <h3 className="menu-item-title">{item.name}</h3>
-                    <p className="menu-item-price">Ціна: {item.price} грн</p>
-                    <p className="menu-item-description">{item.description}</p>
-                    <button
-                      onClick={() => deleteMenuItem(item.id)}
-                      className="btn btn-delete"
-                    >
-                      Видалити
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-      );
-    };
-
-    const CourierPanel = ({ setUserType, setLoggedIn }) => {
-      const [orders, setOrders] = useState([
-        { id: 1, address: 'вул. Шевченка, 10', status: 'Нове', restaurant: 'Піцерія Венеція', time: '14:30', amount: 250 },
-        { id: 2, address: 'вул. Франка, 5', status: 'Нове', restaurant: 'Суші-бар Токіо', time: '15:00', amount: 400 },
-      ]);
+    const CourierPanel = ({ orders, setOrders }) => {
       const [completedOrders, setCompletedOrders] = useState([]);
-      const [useAI, setUseAI] = useState(false);
 
-      const assignOrdersAI = () => {
-        const updatedOrders = orders.map((order) => ({
-          ...order,
-          status: 'Прийнято (ШІ)',
-        }));
+      const takeOrder = async (orderId) => {
+        await fetch(`${API_URL}/orders/${orderId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'Прийнято' }),
+        });
+        const response = await fetch(`${API_URL}/orders`);
+        const updatedOrders = await response.json();
         setOrders(updatedOrders);
-        alert('Замовлення розподілено ШІ!');
       };
 
-      const takeOrder = (orderId) => {
-        setOrders(
-          orders.map((order) =>
-            order.id === orderId ? { ...order, status: 'Прийнято' } : order
-          )
-        );
-      };
-
-      const completeOrder = (orderId) => {
-        const completed = orders.find((order) => order.id === orderId);
+      const completeOrder = async (orderId) => {
+        const completed = orders.find(order => order.id === orderId);
         setCompletedOrders([...completedOrders, completed]);
-        setOrders(orders.filter((order) => order.id !== orderId));
+        await fetch(`${API_URL}/orders/${orderId}`, {
+          method: 'DELETE',
+        });
+        const response = await fetch(`${API_URL}/orders`);
+        const updatedOrders = await response.json();
+        setOrders(updatedOrders);
       };
-
-      useEffect(() => {
-        if (useAI) {
-          assignOrdersAI();
-        }
-      }, [useAI]);
 
       return (
-        <div className="courier-container">
-          <button
-            onClick={() => { setUserType(null); setLoggedIn(false); }}
-            className="btn btn-back"
-          >
-            ← Назад
-          </button>
-          <h1 className="section-title">Панель кур’єра</h1>
-          <div className="courier-controls">
-            <label className="ai-toggle">
-              <input
-                type="checkbox"
-                checked={useAI}
-                onChange={(e) => setUseAI(e.target.checked)}
-              />
-              <span>Автоматичний розподіл (ШІ)</span>
-            </label>
-          </div>
-          <div className="order-list">
-            <h2 className="card-title">Доступні замовлення</h2>
-            {orders.length === 0 ? (
-              <p className="text-gray-500">Немає замовлень</p>
-            ) : (
-              <ul className="orders">
-                {orders.map((order) => (
-                  <li key={order.id} className="order-item">
-                    <div>
-                      <h3 className="order-title">{order.restaurant}</h3>
-                      <p className="order-address">Адреса: {order.address}</p>
-                      <p className="order-details">Час: {order.time}</p>
-                      <p className="order-details">Сума: {order.amount} грн</p>
-                      <p className="order-status">Статус: {order.status}</p>
-                    </div>
-                    <div className="order-actions">
-                      {!useAI && order.status === 'Нове' && (
-                        <button
-                          onClick={() => takeOrder(order.id)}
-                          className="btn btn-courier"
-                        >
-                          Взяти
-                        </button>
-                      )}
-                      {order.status !== 'Нове' && (
-                        <button
-                          onClick={() => completeOrder(order.id)}
-                          className="btn btn-primary"
-                        >
-                          Завершити
-                        </button>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="completed-orders">
-            <h2 className="card-title">Завершені замовлення</h2>
-            {completedOrders.length === 0 ? (
-              <p className="text-gray-500">Немає завершених замовлень</p>
-            ) : (
-              <ul className="orders">
-                {completedOrders.map((order) => (
-                  <li key={order.id} className="order-item">
-                    <div>
-                      <h3 className="order-title">{order.restaurant}</h3>
-                      <p className="order-address">Адреса: {order.address}</p>
-                      <p className="order-details">Сума: {order.amount} грн</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+        <div className="profile-container">
+          <div className="profile-card">
+            <h2 className="profile-title">Панель кур’єра</h2>
+            <div>
+              <h3 className="profile-title">Доступні замовлення</h3>
+              {orders.length === 0 ? (
+                <p>Немає замовлень</p>
+              ) : (
+                <ul>
+                  {orders.filter(o => o.status === 'Нове').map(order => (
+                    <li key={order.id} className="order-item">
+                      <p>Ресторан: {order.restaurant}</p>
+                      <p>Страва: {order.item}</p>
+                      <button onClick={() => takeOrder(order.id)} className="btn btn-courier">Взяти</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div>
+              <h3 className="profile-title">Прийняті замовлення</h3>
+              {orders.filter(o => o.status === 'Прийнято').length === 0 ? (
+                <p>Немає прийнятих замовлень</p>
+              ) : (
+                <ul>
+                  {orders.filter(o => o.status === 'Прийнято').map(order => (
+                    <li key={order.id} className="order-item">
+                      <p>Ресторан: {order.restaurant}</p>
+                      <p>Страва: {order.item}</p>
+                      <button onClick={() => completeOrder(order.id)} className="btn btn-primary">Завершити</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div>
+              <h3 className="profile-title">Завершені замовлення</h3>
+              {completedOrders.length === 0 ? (
+                <p>Немає завершених замовлень</p>
+              ) : (
+                <ul>
+                  {completedOrders.map(order => (
+                    <li key={order.id} className="order-item">
+                      <p>Ресторан: {order.restaurant}</p>
+                      <p>Страва: {order.item}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -785,21 +396,12 @@
 
     const App = () => {
       const [userType, setUserType] = useState(null);
-      const [loggedIn, setLoggedIn] = useState(false);
+      const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('currentUser'));
 
-      if (!userType) {
-        return <HomePage setUserType={setUserType} />;
-      }
-
-      if (!loggedIn) {
-        return <Login userType={userType} setLoggedIn={setLoggedIn} setUserType={setUserType} />;
-      }
-
-      if (userType === 'restaurant') {
-        return <RestaurantPanel setUserType={setUserType} setLoggedIn={setLoggedIn} />;
-      } else if (userType === 'courier') {
-        return <CourierPanel setUserType={setUserType} setLoggedIn={setLoggedIn} />;
-      }
+      if (!userType && !loggedIn) return <HomePage setUserType={setUserType} />;
+      if (userType === 'register') return <Register setUserType={setUserType} />;
+      if (userType === 'login') return <Login setUserType={setUserType} setLoggedIn={setLoggedIn} />;
+      if (loggedIn) return <Profile setLoggedIn={setLoggedIn} />;
 
       return null;
     };
